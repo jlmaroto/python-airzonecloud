@@ -1,0 +1,7 @@
+websockets
+aiohttp
+asyncio
+pytest
+pytest-cov
+pytest-asyncio
+pytest-mock
