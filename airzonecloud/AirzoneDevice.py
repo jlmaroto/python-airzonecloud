@@ -3,7 +3,6 @@ from abc import abstractmethod
 import logging
 import json
 from .const import *
-
 logger = logging.getLogger("Airzone")
 logger.setLevel(logging.INFO) 
 
@@ -38,7 +37,7 @@ class AirzoneDevice:
 
     @staticmethod
     def get_device(data, conn, installation):
-        _class = globals()["Device_" + data["type"]]
+        _class = globals()["AirzoneDevice_" + data["type"]]
         device = _class(
             data["device_id"],
             data["ws_id"],
@@ -47,6 +46,9 @@ class AirzoneDevice:
             data.get("name") or ("Sin nombre " + data["type"]),
         )
         return device
+
+    def get_installation(self):
+        return self._installation
 
     async def update(self, command_no, message_data, ws_client):
         try:
@@ -75,6 +77,10 @@ class AirzoneDevice_az_ccp(AirzoneDevice):
 
 
 class AirzoneDevice_az_system(AirzoneDevice):
+    def __init__(self, device_id, ws_id, conn, installation, name=None):
+        self.ws_command_listeners=[]
+        super().__init__(device_id, ws_id, conn, installation, name)
+
     async def get_capabilities(self):
         while self.status == {}:
             await asyncio.sleep(0.1)
