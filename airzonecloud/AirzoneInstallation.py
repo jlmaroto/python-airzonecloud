@@ -32,7 +32,15 @@ class AirzoneInstallation:
     def get_system_status(self):
         status = False
         for device in self.devices:
-            if isinstance(device,AirzoneDevice_az_zone):
-                status = status or (device.status.get("power",False) and device.status.get("target_temperature",0)>device.status.get("current_temperature",0))
+            if isinstance(device, AirzoneDevice_az_zone):
+                status = status or (
+                    device.status.get("power", False)
+                    and device.status.get("setpoint_air_heat", {"celsius": 0}).get(
+                        "celsius", 0
+                    )
+                    > device.status.get("local_temperature", {"celsius": 0}).get(
+                        "celsius", 0
+                    )
+                )
 
         return status
