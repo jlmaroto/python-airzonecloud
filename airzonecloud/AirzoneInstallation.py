@@ -33,6 +33,14 @@ class AirzoneInstallation:
         status = False
         for device in self.devices:
             if isinstance(device, AirzoneDevice_az_zone):
+                status = status or device.status.get("power", False)
+
+        return status
+    
+    def get_system_idle(self):
+        status = False
+        for device in self.devices:
+            if isinstance(device, AirzoneDevice_az_zone):
                 status = status or (
                     device.status.get("power", False)
                     and device.status.get("setpoint_air_heat", {"celsius": 0}).get(
