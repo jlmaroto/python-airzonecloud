@@ -89,7 +89,7 @@ class AirzoneDevice_az_system(AirzoneDevice):
     def get_system_status(self):
         return self.get_installation().get_system_status()
     
-    def get_system_status(self):
+    def get_system_idle(self):
         return self.get_installation().get_system_idle()
 
 
