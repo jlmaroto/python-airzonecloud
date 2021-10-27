@@ -86,6 +86,9 @@ class AirzoneDevice_az_system(AirzoneDevice):
             await asyncio.sleep(0.1)
         return self.status
 
+    def get_system_status(self):
+        return self.get_installation().get_installation_status()
+        
     async def set_mode(self, mode):
         await self._conn.patch(
             f"/devices/{self._id}",

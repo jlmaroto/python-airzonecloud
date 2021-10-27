@@ -1,5 +1,5 @@
 from .AirzoneCloudConnector import AirzoneCloudConnector
-from .AirzoneDevice import AirzoneDevice, AirzoneDevice_az_system
+from .AirzoneDevice import AirzoneDevice, AirzoneDevice_az_system, AirzoneDevice_az_zone
 import asyncio
 
 
@@ -28,3 +28,10 @@ class AirzoneInstallation:
         ws_client = self._conn.get_websocket()
         ws_client.append_startup_command(ws_client.listen_instalation, (self._id,))
         asyncio.create_task(self._conn.get_websocket().open_client())
+
+    def get_system_status(self):
+        status = False
+        for device in self.devices:
+            if isinstance(device,AirzoneDevice_az_zone):
+                status = status or device.status.get("power",False)
+        return status
