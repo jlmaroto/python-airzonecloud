@@ -46,7 +46,7 @@ class AirzoneInstallation:
                     and device.status.get("setpoint_air_heat", {"celsius": 0}).get(
                         "celsius", 0
                     )
-                    > device.status.get("local_temperature", {"celsius": 0}).get(
+                    > device.status.get("local_temp", {"celsius": 0}).get(
                         "celsius", 0
                     )
                 )
