@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setup(
     name="python-airzonecloud",
-    version="0.0.5",
+    version="0.0.6",
     author="José Luis Maroto",
     author_email="maroto.joseluis@gmail.com",
     description="A package to connect to AirZone cloud",

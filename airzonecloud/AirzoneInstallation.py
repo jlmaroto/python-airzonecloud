@@ -33,5 +33,6 @@ class AirzoneInstallation:
         status = False
         for device in self.devices:
             if isinstance(device,AirzoneDevice_az_zone):
-                status = status or device.status.get("power",False)
+                status = status or (device.status.get("power",False) and device.status.get("target_temperature",0)>device.status.get("current_temperature",0))
+
         return status
