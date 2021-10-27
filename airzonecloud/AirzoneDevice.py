@@ -87,7 +87,7 @@ class AirzoneDevice_az_system(AirzoneDevice):
         return self.status
 
     def get_system_status(self):
-        return self.get_installation().get_installation_status()
+        return self.get_installation().get_system_status()
         
     async def set_mode(self, mode):
         await self._conn.patch(
